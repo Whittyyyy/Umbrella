@@ -52,6 +52,7 @@ end
 function Furion.OnUpdate()
 	myHero = Heroes.GetLocal()
 	myTeam = Entity.GetTeamNum(myHero)
+	enemy = Input.GetNearestHeroToCursor(myTeam, Enum.TeamType.TEAM_ENEMY)
 	mana = NPC.GetMana(myHero)
 	if not myHero or NPC.GetUnitName(myHero) ~= "npc_dota_hero_furion" then return end
 	if Menu.IsEnabled(Furion.optionEnable) and Menu.IsKeyDown(Furion.optionToggleKey) then
@@ -61,6 +62,7 @@ end
 
 function Furion.Combo(myHero, enemy)
 	myHero = Heroes.GetLocal()
+	myTeam = Entity.GetTeamNum(myHero)
 	mana = NPC.GetMana(myHero)
 	sprout = NPC.GetAbility(myHero, "furion_sprout")
 	teleportation = NPC.GetAbility(myHero, "furion_teleportation")
