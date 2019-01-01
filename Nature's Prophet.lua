@@ -1,6 +1,6 @@
 local Furion = {}
 local enemy
-local myHero
+local myHero, myTeam
 local mana
 
 Furion.optionEnable = Menu.AddOptionBool({"Hero Specific", "Nature's Prophet"}, "Enabled", false)
@@ -38,22 +38,20 @@ Furion.optionLinkenSolar = Menu.AddOptionBool({"Hero Specific", "Nature's Prophe
 Furion.optionLinkenUrn = Menu.AddOptionBool({"Hero Specific", "Nature's Prophet", "Linken"}, "Urn of Shadows", false)
 Furion.optionLinkenVessel = Menu.AddOptionBool({"Hero Specific", "Nature's Prophet", "Linken"}, "Spirit Vessel", false)
 
-function Furion.z()
+function Furion.Init()
 	myHero = nil
 	enemy = nil
 	mana = nil
+	myTeam = nil
 end
 
 function Furion.OnGameStart()
-	Furion.z()
-end
-
-function Furion.OnGameEnd()
-	Fruion.z()
+	Furion.Init()
 end
 
 function Furion.OnUpdate()
 	myHero = Heroes.GetLocal()
+	myTeam = Entity.GetTeamNum(myHero)
 	mana = NPC.GetMana(myHero)
 	if not myHero or NPC.GetUnitName(myHero) ~= "npc_dota_hero_furion" then return end
 	if Menu.IsEnabled(Furion.optionEnable) and Menu.IsKeyDown(Furion.optionToggleKey) then
@@ -82,93 +80,10 @@ function Furion.Combo(myHero, enemy)
 	solar = NPC.GetItem(myHero, "item_solar_crest")
 	urn = NPC.GetItem(myHero, "item_urn_of_shadows")
 	vessel = NPC.GetItem(myHero, "item_spirit_vessel")
-	enemy = Input.GetNearestHeroToCursor(Entity.GetTeamNum(myHero), Enum.TeamType.TEAM_ENEMY)
-	if NPC.IsLinkensProtected(enemy) and not NPC.HasModifier(enemy, "modifier_item_lotus_orb_active") and hex or orchid or bloodthorn or eul or hh or diffusal or force or pike or medallion or nullifier or rod or solar or urn or vessel then
-		if Menu.IsEnabled(Furion.optionLinken) then
-			if Menu.IsEnabled(Furion.optionLinkenHex) then
-				if hex and Ability.IsReady(hex) then
-					Ability.CastTarget(hex, enemy)
-				end
-			end
-		elseif Menu.IsEnabled(Furion.optionLinken) then
-			if Menu.IsEnabled(Furion.optionLinkenOrchid) then
-				if orchid and Ability.IsReady(orchid) then
-					Ability.CastTarget(orchid, enemy)
-				end
-			end
-		elseif Menu.IsEnabled(Furion.optionLinken) then
-			if Menu.IsEnabled(Furion.optionLinkenBloodthorn) then
-				if bloodthorn and Ability.IsReady(bloodthorn) then
-					Ability.CastTarget(bloodthorn, enemy)
-				end
-			end
-		elseif Menu.IsEnabled(Furion.optionLinken) then
-			if Menu.IsEnabled(Furion.optionLinkenEul) then
-				if eul and Ability.IsReady(eul) then
-					Ability.CastTarget(eul, enemy)
-				end
-			end
-		elseif Menu.IsEnabled(Furion.optionLinken) then
-			if Menu.IsEnabled(Furion.optionLinkenHH) then
-				if hh and Ability.IsReady(hh) then
-					Ability.CastTarget(hh, enemy)
-				end
-			end
-		elseif Menu.IsEnabled(Furion.optionLinken) then
-			if Menu.IsEnabled(Furion.optionLinkenDiffusal) then
-				if diffusal and Ability.IsReady(diffusal) then
-					Ability.CastTarget(diffusal, enemy)
-				end
-			end
-		elseif Menu.IsEnabled(Furion.optionLinken) then
-			if Menu.IsEnabled(Furion.optionLinkenForce) then
-				if force and Ability.IsReady(force) then
-					Ability.CastTarget(force, enemy)
-				end
-			end
-		elseif Menu.IsEnabled(Furion.optionLinken) then
-			if Menu.IsEnabled(Furion.optionLinkenPike) then
-				if pike and Ability.IsReady(pike) then
-					Ability.CastTarget(pike, enemy)
-				end
-			end
-		elseif Menu.IsEnabled(Furion.optionLinken) then
-			if Menu.IsEnabled(Furion.optionLinkenMedallion) then
-				if medallion and Ability.IsReady(medalliom) then
-					Ability.CastTarget(medallion, enemy)
-				end
-			end
-		elseif Menu.IsEnabled(Furion.optionLinken) then
-			if Menu.IsEnabled(Furion.optionLinkenNullifier) then
-				if nullifier and Ability.IsReady(nullifier) then
-					Ability.CastTarget(nullifier, enemy)
-				end
-			end
-		elseif Menu.IsEnabled(Furion.optionLinken) then
-			if Menu.IsEnabled(Furion.optionLinkenRod) then
-				if rod and Ability.IsReady(rod) then
-					Ability.CastTarget(rod, enemy)
-				end
-			end
-		elseif Menu.IsEnabled(Furion.optionLinken) then
-			if Menu.IsEnabled(Furion.optionLinkenSolar) then
-				if solar and Ability.IsReady(solar) then
-					Ability.CastTarget(solar, enemy)
-				end
-			end
-		elseif Menu.IsEnabled(Furion.optionLinken) then
-			if Menu.IsEnabled(Furion.optionLinkenUrn) then
-				if urn and Ability.IsReady(urn) then
-					Ability.CastTarget(urn, enemy)
-				end
-			end
-		elseif Menu.IsEnabled(Furion.optionLinken) then
-			if Menu.IsEnabled(Furion.optionLinkenVessel) then
-				if vessel and Ability.IsReady(vessel) then
-					Ability.CastTarget(vessel, enemy)
-				end
-			end
-		end
+	enemy = Input.GetNearestHeroToCursor(myTeam, Enum.TeamType.TEAM_ENEMY)
+	
+	if Furion.IsLinkensProtected(enemy) and Menu.IsEnabled(Furion.optionLinken) and not NPC.HasState(enemy, Enum.ModifierState.MODIFIER_STATE_MAGIC_IMMUNE) then
+		Furion.PoopLinken()
 	end
 
 	if Entity.GetHealth(enemy) > 1 and not NPC.HasModifier(enemy, "modifier_item_lotus_orb_active") then
@@ -187,7 +102,7 @@ function Furion.Combo(myHero, enemy)
 		if hh and Menu.IsEnabled(Furion.optionEnableHH) and Ability.IsCastable(hh, mana) and Ability.IsReady(hh) then
 			Ability.CastTarget(hh, enemy)
 		end
-		if diffusal and Menu.IsEnabled(Furion.optionEnableDiffusal) and Ability.IsCastable(diffusal, mana) and Ability.IsReady(diffusal) then
+		if diffusal and Menu.IsEnabled(Furion.optionEnableDiffusal) and Ability.IsCastable(diffusal, 0) and Ability.IsReady(diffusal) then
 			Ability.CastTarget(diffusal, enemy)
 		end
 		if medallion and Menu.IsEnabled(Furion.optionEnableMedallion) and Ability.IsCastable(medallion, mana) and Ability.IsReady(medallion) then
@@ -225,6 +140,71 @@ function Furion.Block(myHero, enemy)
 			Ability.CastPosition(treants, position)
 			return
 		end
+	end
+end
+
+function Furion.IsLinkensProtected(npc)
+	if NPC.IsLinkensProtected(npc) then
+		return true
+	end
+end
+
+function Furion.PoopLinken(exception)
+	if Menu.IsEnabled(Furion.optionLinkenHex) and hex and Ability.IsCastable(hex, mana) then
+		Ability.CastTarget(hex, enemy)
+		return
+	end
+	if Menu.IsEnabled(Furion.optionLinkenOrchid) and orchid and Ability.IsCastable(orchid, mana) then
+		Ability.CastTarget(orchid, enemy)
+		return
+	end
+	if Menu.IsEnabled(Furion.optionLinkenBloodthorn) and bloodthorn and Ability.IsCastable(bloodthorn, mana) then
+		Ability.CastTarget(bloodthorn, enemy)
+		return
+	end
+	if Menu.IsEnabled(Furion.optionLinkenEul) and eul and Ability.IsCastable(eul, mana) and eul ~= exception then
+		Ability.CastTarget(eul, enemy)
+		return
+	end
+	if Menu.IsEnabled(Furion.optionLinkenDiffusal) and diffusal and Ability.IsCastable(diffusal, 0) then
+		Ability.CastTarget(diffusal, enemy)
+		return
+	end
+	if Menu.IsEnabled(Furion.optionLinkenForce) and force and Ability.IsCastable(force, mana) then
+		Ability.CastTarget(force, enemy)
+		return
+	end
+	if Menu.IsEnabled(Furion.optionLinkenPike) and pike and Ability.IsCastable(pike, mana) then
+		Ability.CastTarget(pike, enemy)
+		return
+	end
+	if Menu.IsEnabled(Furion.optionLinkenMedallion) and medallion and Ability.IsCastable(medallion, mana) then
+		Ability.CastTarget(medallion, enemy)
+		return
+	end
+	if Menu.IsEnabled(Furion.optionLinkenNullifier) and nullifier and Ability.IsCastable(nullifier, mana) then
+		Ability.CastTarget(nullifier, enemy)
+		return
+	end
+	if Menu.IsEnabled(Furion.optionLinkenRod) and rod and Ability.IsCastable(rod, mana) then
+		Ability.CastTarget(rod, enemy)
+		return
+	end
+	if Menu.IsEnabled(Furion.optionLinkenSolar) and solar and Ability.IsCastable(solar, mana) then
+		Ability.CastTarget(solar, enemy)
+		return
+	end
+	if Menu.IsEnabled(Furion.optionLinkenUrn) and urn and Ability.IsCastable(urn, mana) then
+		Ability.CastTarget(urn, enemy)
+		return
+	end
+	if Menu.IsEnabled(Furion.optionLinkenVessel) and vessel and Ability.IsCastable(vessel, mana) then
+		Ability.CastTarget(vessel, enemy)
+		return
+	end
+	if Menu.IsEnabled(Furion.optionLinkenHH) and hh and Ability.IsCastable(hh, mana) then
+		Ability.CastTarget(hh, enemy)
+		return
 	end
 end
 
