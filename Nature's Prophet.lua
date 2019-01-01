@@ -197,6 +197,7 @@ function Furion.Block(myHero, enemy)
 		if Ability.IsCastable(treants, mana) and Ability.Isready(treants) then
 		Ability.CastPosition(treants, position)
 		return
+		end
 	end
 end
 
