@@ -88,55 +88,55 @@ function Furion.Combo(myHero, enemy)
 				if hex and Ability.IsReady(hex) then
 					Ability.CastTarget(hex, enemy)
 				end
-			elseif Menu.IsEnabled(Furion.optionLinkenOrchid) then
+			if Menu.IsEnabled(Furion.optionLinkenOrchid) then
 				if orchid and Ability.IsReady(orchid) then
 					Ability.CastTarget(orchid, enemy)
 				end
-			elseif Menu.IsEnabled(Furion.optionLinkenBloodthorn) then
+			if Menu.IsEnabled(Furion.optionLinkenBloodthorn) then
 				if bloodthorn and Ability.IsReady(bloodthorn) then
 					Ability.CastTarget(bloodthorn, enemy)
 				end
-			elseif Menu.IsEnabled(Furion.optionLinkenEul) then
+			if Menu.IsEnabled(Furion.optionLinkenEul) then
 				if eul and Ability.IsReady(eul) then
 					Ability.CastTarget(eul, enemy)
 				end
-			elseif Menu.IsEnabled(Furion.optionLinkenHH) then
+			if Menu.IsEnabled(Furion.optionLinkenHH) then
 				if hh and Ability.IsReady(hh) then
 					Ability.CastTarget(hh, enemy)
 				end
-			elseif Menu.IsEnabled(Furion.optionLinkenDiffusal) then
+			if Menu.IsEnabled(Furion.optionLinkenDiffusal) then
 				if diffusal and Ability.IsReady(diffusal) then
 					Ability.CastTarget(diffusal, enemy)
 				end
-			elseif Menu.IsEnabled(Furion.optionLinkenForce) then
+			if Menu.IsEnabled(Furion.optionLinkenForce) then
 				if force and Ability.IsReady(force) then
 					Ability.CastTarget(force, enemy)
 				end
-			elseif Menu.IsEnabled(Furion.optionLinkenPike) then
+			if Menu.IsEnabled(Furion.optionLinkenPike) then
 				if pike and Ability.IsReady(pike) then
 					Ability.CastTarget(pike, enemy)
 				end
-			elseif Menu.IsEnabled(Furion.optionLinkenMedallion) then
+			if Menu.IsEnabled(Furion.optionLinkenMedallion) then
 				if medallion and Ability.IsReady(medalliom) then
 					Ability.CastTarget(medallion, enemy)
 				end
-			elseif Menu.IsEnabled(Furion.optionLinkenNullifier) then
+			if Menu.IsEnabled(Furion.optionLinkenNullifier) then
 				if nullifier and Ability.IsReady(nullifier) then
 					Ability.CastTarget(nullifier, enemy)
 				end
-			elseif Menu.IsEnabled(Furion.optionLinkenRod) then
+			if Menu.IsEnabled(Furion.optionLinkenRod) then
 				if rod and Ability.IsReady(rod) then
 					Ability.CastTarget(rod, enemy)
 				end
-			elseif Menu.IsEnabled(Furion.optionLinkenSolar) then
+			if Menu.IsEnabled(Furion.optionLinkenSolar) then
 				if solar and Ability.IsReady(solar) then
 					Ability.CastTarget(solar, enemy)
 				end
-			elseif Menu.IsEnabled(Furion.optionLinkenUrn) then
+			if Menu.IsEnabled(Furion.optionLinkenUrn) then
 				if urn and Ability.IsReady(urn) then
 					Ability.CastTarget(urn, enemy)
 				end
-			elseif Menu.IsEnabled(Furion.optionLinkenVessel) then
+			if Menu.IsEnabled(Furion.optionLinkenVessel) then
 				if vessel and Ability.IsReady(vessel) then
 					Ability.CastTarget(vessel, enemy)
 				end
