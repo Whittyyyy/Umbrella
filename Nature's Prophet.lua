@@ -194,7 +194,7 @@ function Furion.Block(myHero, enemy)
 
 	if Ability.IsCastable(sprout, mana) and Ability.IsReady(sprout) then
 		Ability.CastTarget(sprout, enemy)
-		if Ability.IsCastable(treants, mana) and Ability.Isready(treants) then
+		if Ability.IsCastable(treants, mana) and Ability.IsReady(treants) then
 		Ability.CastPosition(treants, position)
 		return
 		end
