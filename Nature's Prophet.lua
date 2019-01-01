@@ -4,6 +4,7 @@ local myHero
 local mana
 
 Furion.optionEnable = Menu.AddOptionBool({"Hero Specific", "Nature's Prophet"}, "Enabled", false)
+Menu.AddMenuIcon({"Hero Specific", "Nature's Prophet}, "panorama/images/heroes/icons/npc_dota_hero_furion_png.vtex_c")
 Furion.optionToggleKey = Menu.AddKeyOption({"Hero Specific", "Nature's Prophet"}, "Combo Key", Enum.ButtonCode.KEY_SPACE)
 Furion.optionBlock = Menu.AddOptionBool({"Hero Specific", "Nature's Prophet"}, "Treant Block", false)
 -- Skills/Items Combo
@@ -88,54 +89,67 @@ function Furion.Combo(myHero, enemy)
 				if hex and Ability.IsReady(hex) then
 					Ability.CastTarget(hex, enemy)
 				end
+			end
 			if Menu.IsEnabled(Furion.optionLinkenOrchid) then
 				if orchid and Ability.IsReady(orchid) then
 					Ability.CastTarget(orchid, enemy)
 				end
+			end
 			if Menu.IsEnabled(Furion.optionLinkenBloodthorn) then
 				if bloodthorn and Ability.IsReady(bloodthorn) then
 					Ability.CastTarget(bloodthorn, enemy)
 				end
+			end
 			if Menu.IsEnabled(Furion.optionLinkenEul) then
 				if eul and Ability.IsReady(eul) then
 					Ability.CastTarget(eul, enemy)
 				end
+			end
 			if Menu.IsEnabled(Furion.optionLinkenHH) then
 				if hh and Ability.IsReady(hh) then
 					Ability.CastTarget(hh, enemy)
 				end
+			end
 			if Menu.IsEnabled(Furion.optionLinkenDiffusal) then
 				if diffusal and Ability.IsReady(diffusal) then
 					Ability.CastTarget(diffusal, enemy)
 				end
+			end
 			if Menu.IsEnabled(Furion.optionLinkenForce) then
 				if force and Ability.IsReady(force) then
 					Ability.CastTarget(force, enemy)
 				end
+			end
 			if Menu.IsEnabled(Furion.optionLinkenPike) then
 				if pike and Ability.IsReady(pike) then
 					Ability.CastTarget(pike, enemy)
 				end
+			end
 			if Menu.IsEnabled(Furion.optionLinkenMedallion) then
 				if medallion and Ability.IsReady(medalliom) then
 					Ability.CastTarget(medallion, enemy)
 				end
+			end
 			if Menu.IsEnabled(Furion.optionLinkenNullifier) then
 				if nullifier and Ability.IsReady(nullifier) then
 					Ability.CastTarget(nullifier, enemy)
 				end
+			end
 			if Menu.IsEnabled(Furion.optionLinkenRod) then
 				if rod and Ability.IsReady(rod) then
 					Ability.CastTarget(rod, enemy)
 				end
+			end
 			if Menu.IsEnabled(Furion.optionLinkenSolar) then
 				if solar and Ability.IsReady(solar) then
 					Ability.CastTarget(solar, enemy)
 				end
+			end
 			if Menu.IsEnabled(Furion.optionLinkenUrn) then
 				if urn and Ability.IsReady(urn) then
 					Ability.CastTarget(urn, enemy)
 				end
+			end
 			if Menu.IsEnabled(Furion.optionLinkenVessel) then
 				if vessel and Ability.IsReady(vessel) then
 					Ability.CastTarget(vessel, enemy)
