@@ -4,7 +4,7 @@ local myHero
 local mana
 
 Furion.optionEnable = Menu.AddOptionBool({"Hero Specific", "Nature's Prophet"}, "Enabled", false)
-Menu.AddMenuIcon({"Hero Specific", "Nature's Prophet}, "panorama/images/heroes/icons/npc_dota_hero_furion_png.vtex_c")
+Menu.AddMenuIcon({"Hero Specific", "Nature's Prophet"}, "panorama/images/heroes/icons/npc_dota_hero_furion_png.vtex_c")
 Furion.optionToggleKey = Menu.AddKeyOption({"Hero Specific", "Nature's Prophet"}, "Combo Key", Enum.ButtonCode.KEY_SPACE)
 Furion.optionBlock = Menu.AddOptionBool({"Hero Specific", "Nature's Prophet"}, "Treant Block", false)
 -- Skills/Items Combo
