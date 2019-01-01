@@ -54,7 +54,7 @@ end
 function Furion.OnUpdate()
 	myHero = Heroes.GetLocal()
 	mana = NPC.GetMana(myHero)
-	if not me or NPC.GetUnitName(myHero) ~= "npc_dota_hero_furion" then return end
+	if not myHero or NPC.GetUnitName(myHero) ~= "npc_dota_hero_furion" then return end
 	if Menu.IsEnabled(Furion.optionEnable) and Menu.IsKeyDown(Furion.optionToggleKey) then
 		Furion.Combo(myHero, enemy)
 	end
